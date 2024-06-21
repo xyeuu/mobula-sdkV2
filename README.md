@@ -22,6 +22,7 @@ With the Mobula API SDK, you can seamlessly integrate real-time crypto metrics i
 For an enhanced experience, acquire an API key. Generate your key and select a plan fitting your project [here](https://docs.mobula.fi/api-reference/authentification).
 
 <!-- Start  Installation [installation] -->
+
 ## 📦 Installation
 
 ### NPM
@@ -29,9 +30,11 @@ For an enhanced experience, acquire an API key. Generate your key and select a p
 ```bash
 npm mobula-sdk
 ```
+
 <!-- End SDK Installation [installation] -->
 
 <!-- Start SDK Example Usage [usage] -->
+
 ## SDK Example Usage
 
 ### Example
@@ -41,53 +44,55 @@ import { Mobula } from "mobula-sdk";
 import { Order } from "mobula-sdk/dist/sdk/models/operations";
 
 async function run() {
-    const sdk = new Mobula({
-        apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    });
+  const sdk = new Mobula({
+    apiKeyAuth: "<YOUR_API_KEY_HERE>",
+  });
 
-    const res = await sdk.fetchWalletTransactions({
-        blockchains: "56,Ethereum",
-        wallet: "0xd99cB89A20822B0448936DF4f36803778CA5a003",
-    });
+  const res = await sdk.fetchWalletTransactions({
+    blockchains: "56,Ethereum",
+    wallet: "0xd99cB89A20822B0448936DF4f36803778CA5a003",
+  });
 
-    if (res.statusCode == 200) {
-        // handle response
-    }
+  if (res.statusCode == 200) {
+    // handle response
+  }
 }
 
 run();
-
 ```
+
 <!-- End SDK Example Usage [usage] -->
 
 ## 📚 Documentation
 
 - [Getting Started](https://docs.mobula.fi/sdk/introduction)
-  
+
 ### Index
-* [searchCryptoByName](docs/sdks/mobula/README.md#searchcryptobyname) - Search crypto data with asset name
-* [fetchAllCryptoDetails](docs/sdks/mobula/README.md#fetchallcryptodetails) - Get all crypto data with extra fields as needed
-* [fetchAssetMarketData](docs/sdks/mobula/README.md#fetchassetmarketdata) - Get the market metrics for any asset
-* [fetchAssetMarketHistory](docs/sdks/mobula/README.md#fetchassetmarkethistory) - Get the market metrics of an asset over a given timeframe
-* [fetchAssetMetadata](docs/sdks/mobula/README.md#fetchassetmetadata) - Get the metadata of an asset.
-* [fetchAssetTradeHistory](docs/sdks/mobula/README.md#fetchassettradehistory) - Retrieve trade history for a given asset
-* [fetchMultipleAssetMarketData](docs/sdks/mobula/README.md#fetchmultipleassetmarketdata) - Get the market metrics for multiple assets at one time
-* [fetchPairMarketData](docs/sdks/mobula/README.md#fetchpairmarketdata) - Get the market metrics for any DEX pair
-* [fetchPairsMarketData](docs/sdks/mobula/README.md#fetchpairsmarketdata) - Fetch all DEX pairs from a specific asset
-* [fetchWalletHistoryBalance](docs/sdks/mobula/README.md#fetchwallethistorybalance) - Get the historical balance of any EVM-compatible wallets, at any time
-* [fetchWalletHoldings](docs/sdks/mobula/README.md#fetchwalletholdings) - Fetch wallet holdings 
-* [fetchWalletNFTs](docs/sdks/mobula/README.md#fetchwalletnfts) - Fetch wallet NFTs
-* [fetchWalletTransactions](docs/sdks/mobula/README.md#fetchwallettransactions) - Fetch Wallet Transactions
+
+- [searchCryptoByName](docs/sdks/mobula/README.md#searchcryptobyname) - Search crypto data with asset name
+- [fetchAllCryptoDetails](docs/sdks/mobula/README.md#fetchallcryptodetails) - Get all crypto data with extra fields as needed
+- [fetchAssetMarketData](docs/sdks/mobula/README.md#fetchassetmarketdata) - Get the market metrics for any asset
+- [fetchAssetMarketHistory](docs/sdks/mobula/README.md#fetchassetmarkethistory) - Get the market metrics of an asset over a given timeframe
+- [fetchAssetMetadata](docs/sdks/mobula/README.md#fetchassetmetadata) - Get the metadata of an asset.
+- [fetchAssetTradeHistory](docs/sdks/mobula/README.md#fetchassettradehistory) - Retrieve trade history for a given asset
+- [fetchMultipleAssetMarketData](docs/sdks/mobula/README.md#fetchmultipleassetmarketdata) - Get the market metrics for multiple assets at one time
+- [fetchPairMarketData](docs/sdks/mobula/README.md#fetchpairmarketdata) - Get the market metrics for any DEX pair
+- [fetchPairsMarketData](docs/sdks/mobula/README.md#fetchpairsmarketdata) - Fetch all DEX pairs from a specific asset
+- [fetchWalletHistoryBalance](docs/sdks/mobula/README.md#fetchwallethistorybalance) - Get the historical balance of any EVM-compatible wallets, at any time
+- [fetchWalletHoldings](docs/sdks/mobula/README.md#fetchwalletholdings) - Fetch wallet holdings
+- [fetchWalletNFTs](docs/sdks/mobula/README.md#fetchwalletnfts) - Fetch wallet NFTs
+- [fetchWalletTransactions](docs/sdks/mobula/README.md#fetchwallettransactions) - Fetch Wallet Transactions
 <!-- End Available Resources and Operations [operations] -->
 
 <!-- Start Error Handling [errors] -->
+
 ## Error Handling
 
-Handling errors in this SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
+Handling errors in this SDK should largely match your expectations. All operations return a response object or throw an error. If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
 
-| Error Object    | Status Code     | Content Type    |
-| --------------- | --------------- | --------------- |
-| errors.SDKError | 4xx-5xx         | */*             |
+| Error Object    | Status Code | Content Type |
+| --------------- | ----------- | ------------ |
+| errors.SDKError | 4xx-5xx     | _/_          |
 
 Example
 
@@ -95,30 +100,30 @@ Example
 import { Mobula } from "mobula-sdk";
 
 async function run() {
-    const sdk = new Mobula({
-        apiKeyAuth: "<YOUR_API_KEY_HERE>",
+  const sdk = new Mobula({
+    apiKeyAuth: "<YOUR_API_KEY_HERE>",
+  });
+
+  let res;
+  try {
+    res = await sdk.searchCryptoByName({
+      name: "bitcoin",
     });
-
-    let res;
-    try {
-        res = await sdk.searchCryptoByName({
-            name: "bitcoin",
-        });
-    } catch (err) {
-        if (err instanceof errors.SDKError) {
-            console.error(err); // handle exception
-            throw err;
-        }
+  } catch (err) {
+    if (err instanceof errors.SDKError) {
+      console.error(err); // handle exception
+      throw err;
     }
+  }
 
-    if (res.statusCode == 200) {
-        // handle response
-    }
+  if (res.statusCode == 200) {
+    // handle response
+  }
 }
 
 run();
-
 ```
+
 <!-- End Error Handling [errors] -->
 
 ## 🔄 Upgrade
@@ -140,20 +145,20 @@ Need assistance? Contact our support bot on [Telegram: Bot Support](https://t.me
 
 Crafted with 💙 by Mobula for builders like you
 
-
 <!-- No SDK Installation -->
 <!-- No SDK Example Usage -->
 <!-- No SDK Available Operations -->
 <!-- Start Server Selection [server] -->
+
 ## Server Selection
 
 ### Select Server by Index
 
 You can override the default server globally by passing a server index to the `serverIdx: number` optional parameter when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the indexes associated with the available servers:
 
-| # | Server | Variables |
-| - | ------ | --------- |
-| 0 | `https://api.mobula.io/api/1` | None |
+| #   | Server                        | Variables |
+| --- | ----------------------------- | --------- |
+| 0   | `https://api.mobula.io/api/1` | None      |
 
 #### Example
 
@@ -161,55 +166,55 @@ You can override the default server globally by passing a server index to the `s
 import { Mobula } from "mobula-sdk";
 
 async function run() {
-    const sdk = new Mobula({
-        serverIdx: 0,
-        apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    });
+  const sdk = new Mobula({
+    serverIdx: 0,
+    apiKeyAuth: "<YOUR_API_KEY_HERE>",
+  });
 
-    const res = await sdk.searchCryptoByName({
-        name: "bitcoin",
-    });
+  const res = await sdk.searchCryptoByName({
+    name: "bitcoin",
+  });
 
-    if (res.statusCode == 200) {
-        // handle response
-    }
+  if (res.statusCode == 200) {
+    // handle response
+  }
 }
 
 run();
-
 ```
-
 
 ### Override Server URL Per-Client
 
 The default server can also be overridden globally by passing a URL to the `serverURL: str` optional parameter when initializing the SDK client instance. For example:
+
 ```typescript
 import { Mobula } from "mobula-sdk";
 
 async function run() {
-    const sdk = new Mobula({
-        serverURL: "https://api.mobula.io/api/1",
-        apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    });
+  const sdk = new Mobula({
+    serverURL: "https://api.mobula.io/api/1",
+    apiKeyAuth: "<YOUR_API_KEY_HERE>",
+  });
 
-    const res = await sdk.searchCryptoByName({
-        name: "bitcoin",
-    });
+  const res = await sdk.searchCryptoByName({
+    name: "bitcoin",
+  });
 
-    if (res.statusCode == 200) {
-        // handle response
-    }
+  if (res.statusCode == 200) {
+    // handle response
+  }
 }
 
 run();
-
 ```
+
 <!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
+
 ## Custom HTTP Client
 
-The Typescript SDK makes API calls using the [axios](https://axios-http.com/docs/intro) HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
+The Typescript SDK makes API calls using the [axios](https://axios-http.com/docs/intro) HTTP library. In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
 
 For example, you could specify a header for every request that your sdk makes as follows:
 
@@ -223,43 +228,45 @@ const httpClient = axios.create({
 
 const sdk = new Mobula({defaultClient: httpClient});
 ```
+
 <!-- End Custom HTTP Client [http-client] -->
 
 <!-- Start Authentication [security] -->
+
 ## Authentication
 
 ### Per-Client Security Schemes
 
 This SDK supports the following security scheme globally:
 
-| Name         | Type         | Scheme       |
-| ------------ | ------------ | ------------ |
-| `apiKeyAuth` | apiKey       | API key      |
+| Name         | Type   | Scheme  |
+| ------------ | ------ | ------- |
+| `apiKeyAuth` | apiKey | API key |
 
 To authenticate with the API the `apiKeyAuth` parameter must be set when initializing the SDK client instance. For example:
+
 ```typescript
 import { Mobula } from "mobula-sdk";
 
 async function run() {
-    const sdk = new Mobula({
-        apiKeyAuth: "<YOUR_API_KEY_HERE>",
-    });
+  const sdk = new Mobula({
+    apiKeyAuth: "<YOUR_API_KEY_HERE>",
+  });
 
-    const res = await sdk.searchCryptoByName({
-        name: "bitcoin",
-    });
+  const res = await sdk.searchCryptoByName({
+    name: "bitcoin",
+  });
 
-    if (res.statusCode == 200) {
-        // handle response
-    }
+  if (res.statusCode == 200) {
+    // handle response
+  }
 }
 
 run();
-
 ```
+
 <!-- End Authentication [security] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
-
 
 # mobula-sdkV2
